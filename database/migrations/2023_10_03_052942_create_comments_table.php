@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->integer('category_id');
-            $table->text('description');
-            $table->text('short_description');
-            $table->integer('auth_id');
-            $table->date('publish_date');
-            $table->dateTime('end_publish');
-            $table->boolean('is_publish');
+            $table->integer('user_id');
+            $table->integer('post_id');
+            $table->text('comment');
             $table->softDeletes($column = 'deleted_at', $precision = 0);
-            $table->string('future_img_path');
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
     }
 };
