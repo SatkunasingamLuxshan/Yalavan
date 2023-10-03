@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
+            $table->integer('category_id');
+            $table->text('description');
+            $table->text('short_description');
+            $table->integer('auth_id');
+            $table->dateTime('publish_date');
+            $table->dateTime('end_publish');
+            $table->boolean('is_publish');
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->string('future_img_path');
             $table->timestamps();
         });
     }
