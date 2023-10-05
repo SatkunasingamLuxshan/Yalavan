@@ -17,6 +17,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/404', function () {
+    return view('frontend.404');
+});
+Route::get('/aboutus', function () {
+    return view('frontend.aboutus');
+});
+Route::get('/index', function () {
+    return view('frontend.index');
+});
+Route::get('/blog', function () {
+    return view('frontend.blog');
+});
+Route::get('/blogdeatils', function () {
+    return view('frontend.blogdeatils');
+});
+Route::get('/contact', function () {
+    return view('frontend.contact');
+});
+
 
 Auth::routes();
 
