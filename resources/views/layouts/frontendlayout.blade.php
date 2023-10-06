@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/styles.css" rel="stylesheet">
+
+@vite([ 'resources/js/app.js'])
 </head>
 
 <body>
@@ -46,10 +48,44 @@
                                 </select>
                             </div>
 
-                            <ul class="topbar-link">
+                            {{-- <ul class="topbar-link">
                                 <li><a href="login.html">Login</a></li>
                                 <li><a href="register.html">Register</a></li>
-                            </ul>
+                            </ul> --}}
+                            <ul class="topbar-link">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li >
+                                    <a  href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li >
+                                    <a  href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
                         </div>
                     </div>
                 </div>
@@ -77,23 +113,23 @@
                     <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                         <ul class="navbar-nav ml-auto ">
                             <li class="nav-item">
-                                <a class="nav-link active" href="/index">home</a>
+                                <a class="nav-link active" href="{{route('home')}}">home</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="/aboutus"> about </a>
+                                <a class="nav-link" href="{{route('aboutus')}}"> about </a>
                             </li>
                             <li class="nav-item dropdown has-megamenu">
-                                <a class="nav-link" href="/blog">blog </a>
+                                <a class="nav-link" href="{{route('blog')}}">blog </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Pages </a>
                                 <ul class="dropdown-menu animate fade-up">
-                                    <li><a class="dropdown-item icon-arrow" href="/blogdetails"> Blog single detail
+                                    <li><a class="dropdown-item icon-arrow" href="{{route('blogdeatils')}}"> Blog single detail
                                         </a></li>
-                                    <li><a class="dropdown-item" href="/404"> 404 Error </a>
+                                    <li><a class="dropdown-item" href="{{route('error')}}"> 404 Error </a>
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="/contact"> contact </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('contact')}}"> contact </a></li>
                         </ul>
 
 
@@ -163,24 +199,24 @@
                         <nav class="list-group list-group-flush">
                             <ul class="navbar-nav ">
                                 <li class="nav-item">
-                                    <a class="nav-link active text-dark" href="/index"> Home</a>
+                                    <a class="nav-link active text-dark" href="{{route('home')}}"> Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="/aboutus"> About </a>
+                                    <a class="nav-link text-dark" href="{{route('aboutus')}}"> About </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="/blog">Blog </a>
+                                    <a class="nav-link text-dark"href="{{route('blog')}}">Blog </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active dropdown-toggle  text-dark" href="#"
                                         data-toggle="dropdown">Pages </a>
                                     <ul class="dropdown-menu dropdown-menu-left">
                                         <li><a class="dropdown-item" href="/blogdetails">Blog details</a></li>
-                                        <li><a class="dropdown-item" href="/error"> 404 Error</a></li>
+                                        <li><a class="dropdown-item" href="{{route('error')}}"> 404 Error</a></li>
 
                                     </ul>
                                 </li>
-                                <li class="nav-item"><a class="nav-link  text-dark" href="/contact"> Contact </a>
+                                <li class="nav-item"><a class="nav-link  text-dark" href="{{route('contact')}}"> Contact </a>
                                 </li>
                             </ul>
 
